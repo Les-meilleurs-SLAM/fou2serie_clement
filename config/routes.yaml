@@ -4,3 +4,7 @@
 home:
     path: /
     controller: App\Controller\HomeController::index
+
+news:
+    path: /news
+    controller: App\Controller\NewsController::index
