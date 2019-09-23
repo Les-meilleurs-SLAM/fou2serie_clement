@@ -19,7 +19,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-        <a class="navbar-brand" href="/"><img src="/images/logo.png" height="30" alt="mdb logo"></a>
+        <a class="navbar-brand" href="{{ path('home') }}"><img src="/images/logo.png" height="30" alt="mdb logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
             aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -27,10 +27,10 @@
         <div class="collapse navbar-collapse" id="basicExampleNav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Accueil</a>
+                    <a class="nav-link" href="{{ path('home') }}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/news">News</a>
+                    <a class="nav-link" href="{{ path('news') }}">News</a>
                 </li>
             </ul>
         </div>
@@ -38,7 +38,7 @@
 
     {% block body %}{% endblock %}
     <footer class="page-footer font-small blue">
-        <div class="footer-copyright text-center py-3">© 2019 Copyright - Fou de séries</div>
+        <div class="footer-copyright text-center py-3">© {{ "now" |date("Y")}} Copyright - Fou de séries</div>
     </footer>
     {% block javascripts %}{% endblock %}
 </body>

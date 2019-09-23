@@ -12,8 +12,10 @@ class NewsController extends AbstractController
      */
     public function index()
     {
+        $nbNews = 10;
         return $this->render('news/news.html.twig', [
             'messageAccueil' => 'Bienvenue sur les news',
+            'nombreNews' => $nbNews
         ]);
     }
 }
