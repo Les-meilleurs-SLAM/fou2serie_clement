@@ -32,14 +32,4 @@ class SerieRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
-    
-    public function findOneBySomeField($value): ?Serie
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
 }

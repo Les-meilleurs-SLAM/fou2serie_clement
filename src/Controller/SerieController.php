@@ -19,4 +19,16 @@ class SerieController extends AbstractController
             'listSeries' => $listSeries
         ]);
     }
+
+    /**
+     * @Route("/infoserie/{id}", name="infoserie")
+     */
+    public function info($id)
+    {
+        $repository = $this->getDoctrine()->getRepository(Serie::class);
+        $laSerie = $repository->find($id);
+        return $this->render('serie/infoserie.html.twig', [
+            'laSerie' => $laSerie
+        ]);
+    }
 }
