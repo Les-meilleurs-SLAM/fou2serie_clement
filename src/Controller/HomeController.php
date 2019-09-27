@@ -19,7 +19,7 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/home", name="testEntity")
+     * @Route("/testentity", name="testEntity")
      */
     public function testEntity()
     {

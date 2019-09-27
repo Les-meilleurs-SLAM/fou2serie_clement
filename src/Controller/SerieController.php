@@ -6,18 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
 
-class NewsController extends AbstractController
+class SerieController extends AbstractController
 {
     /**
-     * @Route("/news", name="news")
+     * @Route("/serie", name="serie")
      */
     public function index()
     {
         $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $listNews = $repository->getListNews();
-        return $this->render('news/index.html.twig', [
-            'messageAccueil' => 'Bienvenue sur les news',
-            'listNews' => $listNews
+        $listSeries = $repository->findAll();
+        return $this->render('serie/index.html.twig', [
+            'listSeries' => $listSeries
         ]);
     }
 }

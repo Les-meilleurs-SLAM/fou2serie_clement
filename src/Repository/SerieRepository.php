@@ -19,24 +19,20 @@ class SerieRepository extends ServiceEntityRepository
         parent::__construct($registry, Serie::class);
     }
 
-    // /**
-    //  * @return Serie[] Returns an array of Serie objects
-    //  */
-    /*
-    public function findByExampleField($value)
+     /**
+      * @return Serie[] Returns an array of Serie objects
+      */
+    
+    public function getListNews()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('serie')
+            ->orderBy('serie.titre', 'ASC')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
+    
     public function findOneBySomeField($value): ?Serie
     {
         return $this->createQueryBuilder('s')
@@ -46,5 +42,4 @@ class SerieRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
-    */
 }

@@ -4,11 +4,3 @@
 home:
     path: /
     controller: App\Controller\HomeController::index
-
-testentity:
-    path: /testentity
-    controller: App\Controller\HomeController::testEntity
-
-news:
-    path: /news
-    controller: App\Controller\NewsController::index
