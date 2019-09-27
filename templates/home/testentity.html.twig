@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}News!{% endblock %}
+{% block title %}Test Entity!{% endblock %}
 
 {% block body %}
     <style>
@@ -18,8 +18,7 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>{{ messageAccueil }}! ✅</h1>
-        <h3>Il y a {{ nombreNews }} news le {{ "now"|date("d/m/Y") }}.</h3>
+        <h1>L'id du titre: {{ id }} et son nom: {{ titre }} ✅</h1>
         <div class="view overlay">
             <img src="images/news.png" class="img-fluid" alt="Sample image with waves effect.">
             <a>
