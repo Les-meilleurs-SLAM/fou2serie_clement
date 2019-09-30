@@ -26,7 +26,7 @@ class SerieRepository extends ServiceEntityRepository
     public function getListNews()
     {
         return $this->createQueryBuilder('serie')
-            ->orderBy('serie.titre', 'ASC')
+            ->orderBy('serie.premiereDiffusion', 'ASC')
             ->setMaxResults(4)
             ->getQuery()
             ->getResult()
