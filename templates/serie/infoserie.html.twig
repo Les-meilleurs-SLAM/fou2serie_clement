@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SerieController!
+{% block title %}Infos {{ laSerie.titre }}
 {% endblock %}
 
 {% block body %}
@@ -32,7 +32,7 @@
                 <h4>Résumé:</h4>
                 <p class="card-title">{{ laSerie.resume }}</p>
                 <h4>Durée:</h4>
-                <p class="card-title">{{ laSerie.duree|date("H:i:s") }}</p>
+                <p class="card-title">{{ laSerie.duree|date("d") }} jours, {{ laSerie.duree|date("H") }} heures et {{ laSerie.duree|date("i") }} minutes.</p>
                 <h4>Première diffusion:</h4>
                 <p class="card-title">{{ laSerie.premiereDiffusion|date("d-m-Y") }}</p>
             </div>

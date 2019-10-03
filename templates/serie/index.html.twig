@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SerieController!
+{% block title %}Les Séries
 {% endblock %}
 
 {% block body %}
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">{{ uneSerie.titre }}</h4>
-                    <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary">Plus d'infos</a>
+                    <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary"><i class="fas fa-info-circle"></i>  Plus d'infos</a>
                 </div>
             </div>
             <br>
