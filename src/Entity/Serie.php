@@ -10,6 +10,32 @@ use Doctrine\ORM\Mapping as ORM;
 class Serie
 {
     /**
+     * @ORM\ManyToMany(targetEntity="Genre", cascade={"persist"})
+     */
+    private $lesGenres;
+
+    public function __construct()
+    {
+        $this->lesGenres = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function getGenres(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->lesGenres;
+    }
+
+    public function addGenre(Genre $genre)
+    {
+        $this->lesGenres[] = $genre;
+    }
+
+    public function removeGenre(Genre $genre)
+    {
+        // removeElement est une méthode de la classe ArrayCollection
+        $this->lesGenres->removeElement($genre);
+    }
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
