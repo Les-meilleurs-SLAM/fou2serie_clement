@@ -13,8 +13,7 @@ class SerieController extends AbstractController
      */
     public function index()
     {
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $listSeries = $repository->findAll();
+        $listSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries
         ]);
@@ -25,8 +24,7 @@ class SerieController extends AbstractController
      */
     public function info($id)
     {
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $laSerie = $repository->find($id);
+        $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
         return $this->render('serie/infoserie.html.twig', [
             'laSerie' => $laSerie
         ]);

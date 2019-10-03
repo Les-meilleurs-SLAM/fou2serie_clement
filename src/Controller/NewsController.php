@@ -13,8 +13,7 @@ class NewsController extends AbstractController
      */
     public function index()
     {
-        $repository = $this->getDoctrine()->getRepository(Serie::class);
-        $listNews = $repository->getListNews();
+        $listNews = $this->getDoctrine()->getRepository(Serie::class)->getListNews();
         return $this->render('news/index.html.twig', [
             'messageAccueil' => 'Bienvenue sur les news',
             'listNews' => $listNews
