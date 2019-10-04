@@ -15,8 +15,24 @@ class SerieController extends AbstractController
     public function index()
     {
         $listSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
+        $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
-            'listSeries' => $listSeries
+            'listSeries' => $listSeries,
+            'listGenres' => $listGenres
+        ]);
+    }
+
+    /**
+     * @Route("/serie/{genreId}", name="serieByGenre")
+     */
+    public function serieByGenre($genreId)
+    {
+        $leGenre = $this->getDoctrine()->getRepository(Genre::class)->find($genreId);
+        $listSeries = $leGenre->getlesSeries();
+        $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        return $this->render('serie/index.html.twig', [
+            'listSeries' => $listSeries,
+            'listGenres' => $listGenres
         ]);
     }
 
@@ -26,13 +42,7 @@ class SerieController extends AbstractController
     public function info($id)
     {
         $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
-        $lesGenresId = $laSerie->getGenres();
-        $lesGenres = array();
-        $i = 0;
-        foreach ($lesGenresId as $unGenreId) {
-            $lesGenres[$i] = $this->getDoctrine()->getRepository(Genre::class)->find($unGenreId);
-            $i++;
-        }
+        $lesGenres = $laSerie->getGenres();
         return $this->render('serie/infoserie.html.twig', [
             'laSerie' => $laSerie,
             'lesGenres' => $lesGenres

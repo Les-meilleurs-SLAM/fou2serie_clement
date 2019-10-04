@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Serie
 {
     /**
-     * @ORM\ManyToMany(targetEntity="Genre", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Genre", inversedBy="lesSeries")
      */
     private $lesGenres;
 

@@ -18,7 +18,16 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>Toutes les séries</h1>
+        <div class="d-flex justify-content-between">
+            <h1>Toutes les séries</h1>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter par genre</button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ path('serie') }}">Tous</a>
+                {% for unGenre in listGenres %}
+                    <a class="dropdown-item" href="{{ path('serieByGenre', {'genreId': unGenre.id}) }}">{{ unGenre.libelleGenre|capitalize }}</a>
+                {% endfor %}
+            </div>
+        </div>
         {% for uneSerie in listSeries %}
             <div class="card">
                 <div class="view overlay">
@@ -29,7 +38,9 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title">{{ uneSerie.titre }}</h4>
-                    <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary"><i class="fas fa-info-circle"></i>  Plus d'infos</a>
+                    <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary">
+                        <i class="fas fa-info-circle"></i>
+                        Plus d'infos</a>
                 </div>
             </div>
             <br>

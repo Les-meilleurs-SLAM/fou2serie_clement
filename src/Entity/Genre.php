@@ -10,6 +10,27 @@ use Doctrine\ORM\Mapping as ORM;
 class Genre
 {
     /**
+     * @ORM\ManyToMany(targetEntity="Serie", mappedBy="lesGenres")
+     */
+    private $lesSeries;
+
+    public function addSerie(Serie $serie)
+    {
+        $this->lesSeries[] = $serie;
+        return $this;
+    }
+
+    public function removeSerie(Serie $serie)
+    {
+        $this->lesSeries->removeElement($serie);
+    }
+
+    public function getlesSeries(): \Doctrine\Common\Collections\Collection
+    {
+        return $this->lesSeries;
+    }
+
+    /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
