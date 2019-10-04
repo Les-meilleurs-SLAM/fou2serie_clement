@@ -5,6 +5,7 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
+use App\Entity\Genre;
 
 class SerieController extends AbstractController
 {
@@ -25,8 +26,16 @@ class SerieController extends AbstractController
     public function info($id)
     {
         $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
+        $lesGenresId = $laSerie->getGenres();
+        $lesGenres = array();
+        $i = 0;
+        foreach ($lesGenresId as $unGenreId) {
+            $lesGenres[$i] = $this->getDoctrine()->getRepository(Genre::class)->find($unGenreId);
+            $i++;
+        }
         return $this->render('serie/infoserie.html.twig', [
-            'laSerie' => $laSerie
+            'laSerie' => $laSerie,
+            'lesGenres' => $lesGenres
         ]);
     }
 }
