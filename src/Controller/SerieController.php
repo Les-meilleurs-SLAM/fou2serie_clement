@@ -32,10 +32,15 @@ class SerieController extends AbstractController
     /**
      * @Route("/serie/{genreId}", name="serieByGenre")
      */
-    public function serieByGenre($genreId)
+    public function serieByGenre(Request $request, PaginatorInterface $paginator, $genreId)
     {
         $leGenre = $this->getDoctrine()->getRepository(Genre::class)->find($genreId);
         $listSeries = $leGenre->getlesSeries();
+        $listSeries = $paginator->paginate(
+            $listSeries, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,
