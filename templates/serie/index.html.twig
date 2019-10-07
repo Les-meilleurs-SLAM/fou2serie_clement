@@ -7,7 +7,7 @@
     <style>
         .example-wrapper {
             margin: 1em auto;
-            max-width: 800px;
+            max-width: 1000px;
             width: 95%;
             font: 18px / 1.5 sans-serif;
         }
@@ -28,22 +28,26 @@
                 {% endfor %}
             </div>
         </div>
-        {% for uneSerie in listSeries %}
-            <div class="card">
-                <div class="view overlay">
-                    <img class="card-img-top" src="{{ uneSerie.image }}" alt="Card image cap">
-                    <a>
-                        <div class="mask rgba-white-slight"></div>
-                    </a>
+        <div class="card-deck">
+            {% for uneSerie in listSeries %}
+                <div class="col-lg-4 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="view overlay">
+                            <img class="card-img-top" src="{{ uneSerie.image }}" alt="Card image cap">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                        <div class="card-body text-center">
+                            <h4 class="card-title">{{ uneSerie.titre }}</h4>
+                            <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary">
+                                <i class="fas fa-info-circle"></i>
+                                Plus d'infos</a>
+                        </div>
+                    </div>
+                    <br>
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title">{{ uneSerie.titre }}</h4>
-                    <a href="{{ path('infoserie', {'id': uneSerie.id}) }}" class="btn btn-primary">
-                        <i class="fas fa-info-circle"></i>
-                        Plus d'infos</a>
-                </div>
-            </div>
-            <br>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
