@@ -6,19 +6,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
 use App\Entity\Genre;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class SerieController extends AbstractController
 {
     /**
      * @Route("/serie", name="serie")
      */
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator)
     {
         $listSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
+        $listSeries = $paginator->paginate(
+            $listSeries, /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            6 /*limit per page*/
+        );
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,
-            'listGenres' => $listGenres
+            'listGenres' => $listGenres,
         ]);
     }
 
