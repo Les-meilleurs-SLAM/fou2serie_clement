@@ -14,7 +14,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.8.10/js/mdb.min.js"></script>
-        <script>
+        <script type="text/javascript">
             window.onscroll = function () {
                 scrollFunction()
             };
@@ -31,8 +31,12 @@
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
+
+            function ani() {
+                document.getElementById('#img').className = 'rotate-center';
+            }
         </script>
-        <style>
+        <style type="text/css">
             html {
                 scroll-behavior: smooth;
             }
@@ -55,15 +59,42 @@
             #toTop:hover {
                 background-color: #555;
             }
+
+            .rotate-center {
+                -webkit-animation: rotate-center 0.6s ease-in-out both;
+                animation: rotate-center 0.6s ease-in-out both;
+            }
+
+            @-webkit-keyframes rotate-center {
+                0% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0);
+                }
+                100% {
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+            }
+            @keyframes rotate-center {
+                0% {
+                    -webkit-transform: rotate(0);
+                    transform: rotate(0);
+                }
+                100% {
+                    -webkit-transform: rotate(360deg);
+                    transform: rotate(360deg);
+                }
+            }
         </style>
     </head>
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark primary-color">
-            <a class="navbar-brand" href="{{ path('home') }}"><img src="/images/logo.png" height="30" alt="mdb logo"></a>
+            <a class="navbar-brand rotate-center" href="{{ path('home') }}"><img src="/images/logo.png" height="30" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="basicExampleNav">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">

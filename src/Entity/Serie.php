@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -67,6 +69,11 @@ class Serie
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $video;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -128,6 +135,44 @@ class Serie
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getLesGenres(): Collection
+    {
+        return $this->lesGenres;
+    }
+
+    public function addLesGenre(Genre $lesGenre): self
+    {
+        if (!$this->lesGenres->contains($lesGenre)) {
+            $this->lesGenres[] = $lesGenre;
+        }
+
+        return $this;
+    }
+
+    public function removeLesGenre(Genre $lesGenre): self
+    {
+        if ($this->lesGenres->contains($lesGenre)) {
+            $this->lesGenres->removeElement($lesGenre);
+        }
+
+        return $this;
+    }
+
+    public function getVideo(): ?string
+    {
+        return $this->video;
+    }
+
+    public function setVideo(?string $video): self
+    {
+        $this->video = $video;
 
         return $this;
     }

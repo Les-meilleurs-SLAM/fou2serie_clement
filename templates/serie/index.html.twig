@@ -20,7 +20,7 @@
     <div class="example-wrapper">
         <div class="d-flex justify-content-between">
             <h1>Toutes les séries</h1>
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter par genre</button>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</button>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="{{ path('serie') }}">Tous</a>
                 {% for unGenre in listGenres %}
@@ -30,8 +30,8 @@
         </div>
         <div class="card-deck">
             {% for uneSerie in listSeries %}
-                <div class="col-lg-4 col-md-12 mb-4">
-                    <div class="card">
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="card mb-4">
                         <div class="view overlay">
                             <img class="card-img-top" src="{{ uneSerie.image }}" alt="Card image cap">
                             <a>
@@ -49,7 +49,7 @@
                 </div>
             {% endfor %}
         </div>
-        <div class="navigation">
+        <div class="d-flex justify-content-center">
             {{ knp_pagination_render(listSeries) }}
         </div>
     </div>

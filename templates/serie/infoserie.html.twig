@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Infos {{ laSerie.titre }}
+{% block title %}Infos
+    {{ laSerie.titre }}
 {% endblock %}
 
 {% block body %}
@@ -18,28 +19,38 @@
     </style>
 
     <div class="example-wrapper">
-        <a href="{{ path('serie')}}" class="btn btn-primary"><i class="fas fa-long-arrow-alt-left"></i>  Retour aux séries</a>
+        <a href="{{ path('serie')}}" class="btn btn-primary">
+            <i class="fas fa-long-arrow-alt-left"></i>
+            Retour aux séries</a>
         <h1>Infos sur
             {{ laSerie.titre }}</h1>
         <div class="card">
             <div class="view overlay">
-                <img class="card-img-top" src="{{ laSerie.image }}" alt="Card image cap">
+                {# <img class="card-img-top" src="{{ laSerie.image }}" alt="Card image cap">
                 <a>
                     <div class="mask rgba-white-slight"></div>
-                </a>
+                </a> #}
+                <div class="card-img-top embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="{{ laSerie.video }}"></iframe>
+                </div>
             </div>
             <div class="card-body">
                 <h5>Résumé:</h5>
                 <p class="card-text" style="text-align: justify;">{{ laSerie.resume }}</p>
                 <h5>Durée:</h5>
-                <p class="card-text">{{ laSerie.duree|date("d") }} jours, {{ laSerie.duree|date("H") }} heures et {{ laSerie.duree|date("i") }} minutes.</p>
+                <p class="card-text">{{ laSerie.duree|date("d") }}
+                    jours,
+                    {{ laSerie.duree|date("H") }}
+                    heures et
+                    {{ laSerie.duree|date("i") }}
+                    minutes.</p>
                 <h5>Première diffusion:</h5>
                 <p class="card-text">{{ laSerie.premiereDiffusion|date("d-m-Y") }}</p>
                 <h5>Genre(s):</h5>
                 <p class="card-text">
-                {% for unGenre in lesGenres %}
-                {{ unGenre.libelleGenre|capitalize }}<br>
-                {% endfor %}
+                    {% for unGenre in lesGenres %}
+                        {{ unGenre.libelleGenre|capitalize }}<br>
+                    {% endfor %}
                 </p>
             </div>
         </div>
