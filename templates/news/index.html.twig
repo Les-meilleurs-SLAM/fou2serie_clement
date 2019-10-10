@@ -10,6 +10,7 @@
             max-width: 800px;
             width: 95%;
             font: 18px / 1.5 sans-serif;
+            margin-top: calc(100%/15);
         }
 
         .example-wrapper code {
@@ -19,14 +20,38 @@
     </style>
 
     <div class="example-wrapper">
-        <h1>{{ messageAccueil }}! ✅</h1>
-        <h3>Il y a 4 news le
-            {{ "now"|date("d/m/Y") }}.</h3>
-        {% for uneNews in listNews %}
-        <blockquote class="blockquote bq-primary">
-            <p class="bq-title">{{ uneNews.titre }}</p>
-            <p style="text-align: justify"> {{ uneNews.resume }} </p>
-        </blockquote>
-        {% endfor %}
+        <section class="my-5">
+            <h2 class="h1-responsive font-weight-bold text-center my-5">Recent posts</h2>
+            <p class="text-center w-responsive mx-auto mb-5">Il y a 4 news le
+                {{ "now"|date("d/m/Y") }}.</p>
+            <hr class="my-5">
+            {% for uneNews in listNews %}
+                <div class="row">
+                    <div class="col-lg-5">
+                        <div class="view overlay rounded z-depth-2 mb-lg-0 mb-4">
+                            <img class="img-fluid" src="{{ uneNews.image }}" alt="Sample image">
+                            <a>
+                                <div class="mask rgba-white-slight"></div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <a class="indigo-text">
+                            <h6 class="font-weight-bold mb-3">
+                                <i class="fas fa-tv"></i> Séries</h6>
+                        </a>
+                        <h3 class="font-weight-bold mb-3">
+                            <strong>{{ uneNews.titre }}</strong>
+                        </h3>
+                        <p>{{ uneNews.resume|truncate(100, false, '...') }}</p>
+                        <p>by
+                            <a>
+                                <strong>Clément Dudit</strong>
+                            </a>, le {{ "now"|date("d/m/Y") }}.</p>
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </section>
     </div>
 {% endblock %}

@@ -37,9 +37,9 @@ class SerieController extends AbstractController
         $leGenre = $this->getDoctrine()->getRepository(Genre::class)->find($genreId);
         $listSeries = $leGenre->getlesSeries();
         $listSeries = $paginator->paginate(
-            $listSeries, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            6 /*limit per page*/
+            $listSeries,
+            $request->query->getInt('page', 1),
+            6
         );
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
@@ -54,10 +54,12 @@ class SerieController extends AbstractController
     public function info($id)
     {
         $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
+        $tempsTotal = $laSerie->getTempsTotal();
         $lesGenres = $laSerie->getGenres();
         return $this->render('serie/infoserie.html.twig', [
             'laSerie' => $laSerie,
-            'lesGenres' => $lesGenres
+            'lesGenres' => $lesGenres,
+            'tempsTotal' => $tempsTotal
         ]);
     }
 }

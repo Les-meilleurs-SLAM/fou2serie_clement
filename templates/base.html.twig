@@ -32,9 +32,9 @@
                 document.documentElement.scrollTop = 0;
             }
 
-            function ani() {
-                document.getElementById('#img').className = 'rotate-center';
-            }
+            $(function () {
+                $('[data-toggle="tooltip"]').tooltip()
+            })
         </script>
         <style type="text/css">
             html {
@@ -89,7 +89,7 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark primary-color">
+        <nav class="navbar navbar-expand-lg navbar-dark primary-color fixed-top scrolling-navbar">
             <a class="navbar-brand rotate-center" href="{{ path('home') }}"><img src="/images/logo.png" height="30" alt="mdb logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -118,7 +118,7 @@
             <div class="footer-copyright text-center py-3">©
                 {{ "now" |date("Y")}}
                 Copyright - Fou de séries by
-                <a target="_blank" href="https://clement-dudit.fr">Clément Dudit</a>
+                <a target="_blank" data-toggle="tooltip" title="Accédez à mon site web" href="https://clement-dudit.fr">Clément Dudit</a>
             </div>
         </footer>
         {% block javascripts %}{% endblock %}
