@@ -37,6 +37,27 @@
             })
         </script>
         <style type="text/css">
+            @media(max-width: 768px) {
+                .example-wrapper {
+                    margin: calc(100% / 8) auto;
+                }
+            }
+            @media(min-width: 769px) {
+                .example-wrapper {
+                    margin: calc(100% / 15) auto;
+                }
+            }
+
+            .example-wrapper {
+                max-width: 800px;
+                width: 95%;
+                font: 18px / 1.5 sans-serif;
+            }
+            .example-wrapper code {
+                background: #F5F5F5;
+                padding: 2px 6px;
+            }
+
             html {
                 scroll-behavior: smooth;
             }
