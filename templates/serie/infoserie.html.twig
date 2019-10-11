@@ -22,13 +22,17 @@
                 <p class="card-text" style="text-align: justify;">{{ laSerie.resume }}</p>
                 <h5>Durée moyenne d'un épisode:</h5>
                 <p class="card-text">
-                    {{ laSerie.duree|date("i") }} minutes</p>
+                    {{ laSerie.duree|date("i") }}
+                    minutes</p>
                 <h5>Nombre d'épisodes de la série:</h5>
                 <p class="card-text">
                     {{ laSerie.nbEpisodes }}</p>
                 <h5>Durée totale de la série:</h5>
                 <p class="card-text">
-                    {{ heureTotal }} heures et {{ minuteTotal }} minutes
+                    {{ heureTotal }}
+                    heures et
+                    {{ minuteTotal }}
+                    minutes
                 </p>
                 <h5>Première diffusion:</h5>
                 <p class="card-text">{{ laSerie.premiereDiffusion|date("d-m-Y") }}</p>
