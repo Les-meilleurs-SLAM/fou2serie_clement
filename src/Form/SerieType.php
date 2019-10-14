@@ -7,7 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use App\Entity\Genre;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class SerieType extends AbstractType
 {
@@ -21,11 +23,22 @@ class SerieType extends AbstractType
             ->add('image')
             ->add('video')
             ->add('nbEpisodes')
+            ->add('lesGenres', EntityType::class, array(
+                'class' => Genre::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('genre')
+                        ->orderBy('genre.libelleGenre', 'ASC');
+                },
+                'choice_label' => 'libelleGenre',
+                'multiple' => true,
+                'expanded' => true
+            ))
             ->add('sauvegarder', SubmitType::class, [
                 'attr' => [
                     'class' => 'sauvegarder'
                 ],
             ])
+            
             #->add('lesGenres')
         ;
     }
