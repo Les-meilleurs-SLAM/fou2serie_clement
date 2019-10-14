@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>Êtes-vous sur de vouloir supprimer la série
+            {{ laSerie.titre }}
+            ?
+        </h1>
+        <div class="view overlay zoom">
+            <img class="card-img" src="{{ laSerie.image }}" alt="Card image cap"/>
+            <a>
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+        <a href="{{ path('supprimerOK', {'id': laSerie.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
+    </div>
+{% endblock %}

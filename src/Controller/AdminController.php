@@ -40,4 +40,46 @@ class AdminController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/ajouter", name="ajouter")
+     */
+    public function ajouter(Request $request)
+    {
+        $serie = new Serie;
+        $form = $this->createForm(SerieType::class, $serie);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($serie);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin');
+        }
+        return $this->render('admin/ajouter.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/supprimer/{id}", name="supprimer")
+     */
+    public function supprimer($id)
+    {
+        $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
+        return $this->render('admin/supprimer.html.twig', [
+            'laSerie' => $laSerie
+        ]);
+    }
+
+    /**
+     * @Route("/supprimerOK/{id}", name="supprimerOK")
+     */
+    public function supprimerOK($id)
+    {
+        $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->remove($laSerie);
+        $entityManager->flush();
+        return $this->redirectToRoute('admin');
+    }
 }
