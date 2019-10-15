@@ -15,6 +15,9 @@
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
-        <a href="{{ path('supprimerOK', {'id': laSerie.id}) }}" role="button" class="btn btn-danger">Supprimer</a>
+        <form action="{{ path('supprimerOK', {'id': laSerie.id}) }}" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token(laSerie.id) }}">
+            <button type="submit" role="button" class="btn btn-danger">Supprimer</button>
+        </form>
     </div>
 {% endblock %}

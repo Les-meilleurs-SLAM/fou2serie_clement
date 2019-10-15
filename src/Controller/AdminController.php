@@ -76,12 +76,15 @@ class AdminController extends AbstractController
     /**
      * @Route("/supprimerOK/{id}", name="supprimerOK")
      */
-    public function supprimerOK($id)
+    public function supprimerOK($id, Request $request)
     {
         $laSerie = $this->getDoctrine()->getRepository(Serie::class)->find($id);
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($laSerie);
-        $entityManager->flush();
+        $submittedToken = $request->request->get('_token');
+        if ($this->isCsrfTokenValid($laSerie->getId(), $submittedToken)) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($laSerie);
+            $entityManager->flush();
+        }
         return $this->redirectToRoute('admin');
     }
 
