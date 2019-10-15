@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
+use App\Entity\Genre;
+use App\Form\GenreType;
 use App\Form\SerieType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Form;
@@ -81,5 +83,24 @@ class AdminController extends AbstractController
         $entityManager->remove($laSerie);
         $entityManager->flush();
         return $this->redirectToRoute('admin');
+    }
+
+    /**
+     * @Route("/ajouterGenre", name="ajouterGenre")
+     */
+    public function ajouterGenre(Request $request)
+    {
+        $genre = new Genre;
+        $form = $this->createForm(GenreType::class, $genre);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($genre);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin');
+        }
+        return $this->render('admin/ajouterGenre.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

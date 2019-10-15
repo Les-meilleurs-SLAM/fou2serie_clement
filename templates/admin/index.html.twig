@@ -5,9 +5,10 @@
 
 {% block body %}
     <div class="example-wrapper">
-        <div class="d-flex justify-content-between">
-            <h1>Liste des séries</h1>
-            <a href="{{ path('ajouter') }}" class="btn btn-primary" role="button">Ajouter une série  <i class="fas fa-plus-circle"></i></a>
+        <div class="d-flex justify-content-between row">
+            <h1 class="col-xs-6">Liste des séries</h1>
+            <a href="{{ path('ajouter') }}" class="btn btn-primary col-xs-3" role="button">Ajouter une série  <i class="fas fa-plus-circle"></i></a>
+            <a href="{{ path('ajouterGenre') }}" class="btn btn-primary col-xs-3" role="button">Ajouter un genre  <i class="fas fa-plus-circle"></i></a>
         </div>
         <ul class="list-group">
             {% for uneSerie in listSeries %}
