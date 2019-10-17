@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Genre;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class SerieType extends AbstractType
 {
@@ -19,7 +20,10 @@ class SerieType extends AbstractType
             ->add('titre')
             ->add('resume')
             ->add('duree')
-            ->add('premiereDiffusion')
+            ->add('premiereDiffusion', DateType::Class, array(
+                'widget' => 'choice',
+                'years' => range(date('Y')-30, date('Y'))
+            ))
             ->add('image')
             ->add('video')
             ->add('nbEpisodes')

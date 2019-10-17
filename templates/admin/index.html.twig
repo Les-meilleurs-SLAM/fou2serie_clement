@@ -4,6 +4,26 @@
 {% endblock %}
 
 {% block body %}
+    {% for message in app.flashes('admin') %}
+        <script type='text/javascript'>
+            $(document).ready(function () {
+                $('#modal').modal('show');
+            });
+        </script>
+        <div class="modal fade right" name="modal" id="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-frame modal-side modal-bottom-right" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <p class="pt-3 pr-2">{{ message }}
+                            </p>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
     <div class="example-wrapper">
         <div class="d-flex justify-content-between row">
             <h1 class="col-xs-6">Liste des séries</h1>

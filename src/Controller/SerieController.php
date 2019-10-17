@@ -41,6 +41,7 @@ class SerieController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
+        
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,

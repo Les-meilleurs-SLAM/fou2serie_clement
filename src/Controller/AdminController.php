@@ -55,6 +55,7 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($serie);
             $entityManager->flush();
+            $this->addFlash('admin', 'Ajout réalisé avec succès.');
             return $this->redirectToRoute('admin');
         }
         return $this->render('admin/ajouter.html.twig', [
@@ -85,6 +86,7 @@ class AdminController extends AbstractController
             $entityManager->remove($laSerie);
             $entityManager->flush();
         }
+        $this->addFlash('admin', 'Suppression réalisée avec succès.');
         return $this->redirectToRoute('admin');
     }
 
@@ -100,6 +102,7 @@ class AdminController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($genre);
             $entityManager->flush();
+            $this->addFlash('admin', 'Genre ajouté avec succès.');
             return $this->redirectToRoute('admin');
         }
         return $this->render('admin/ajouterGenre.html.twig', [
