@@ -14,7 +14,7 @@
                 <i class="fas fa-plus-circle"></i>
             </a>
         </div>
-        <ul class="list-group">
+        <ul class="list-group mb-3 hover-blue">
             {% for uneSerie in listSeries %}
                 <li class="list-group-item align-items-end">
                     <a href="{{ path('editer', {'id': uneSerie.id}) }}" class="btn btn-primary btn-sm" role="button">Editer</a>

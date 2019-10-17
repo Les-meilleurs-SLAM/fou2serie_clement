@@ -15,7 +15,7 @@
                 <div class="mask rgba-white-slight"></div>
             </a>
         </div>
-        <form action="{{ path('supprimerOK', {'id': laSerie.id}) }}" method="POST">
+        <form action="{{ path('supprimerOK', {'id': laSerie.id}) }}" method="POST" onSubmit="return(confirm('Êtes-vous sûr ?'))">
             <input type="hidden" name="_token" value="{{ csrf_token(laSerie.id) }}">
             <button type="submit" role="button" class="btn btn-danger">Supprimer</button>
         </form>
