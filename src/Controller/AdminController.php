@@ -35,6 +35,7 @@ class AdminController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
+            $this->addFlash('admin', 'Modification réalisée avec succès.');
             return $this->redirectToRoute('admin');
         }
         return $this->render('admin/editer.html.twig', [

@@ -7,12 +7,18 @@
     <div class="example-wrapper">
         <div class="d-flex justify-content-between">
             <h1>Toutes les séries</h1>
-            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</button>
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filtres</button>
             <div class="dropdown-menu hover-blueA">
+                <a class="dropdown-item disabled">Genre</a>
                 <a class="dropdown-item" href="{{ path('serie') }}">Tous</a>
                 {% for unGenre in listGenres %}
                     <a class="dropdown-item" href="{{ path('serieByGenre', {'genreId': unGenre.id}) }}">{{ unGenre.libelleGenre|capitalize }}</a>
                 {% endfor %}
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item disabled">Durée de la série maximum (en min)</a>
+                <a class="dropdown-item notHover-blue" href="{{ path('serieByDuree', {'duree': unGenre.id}) }}"><input type="range" min="{{ minDuree }}" max="{{ maxDuree }}" class="custom-range range" data-toggle="tooltip" title="" id="range" name="range">
+                <output></output>
+                </a>
             </div>
         </div>
 

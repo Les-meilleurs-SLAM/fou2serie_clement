@@ -17,6 +17,16 @@ class SerieController extends AbstractController
     public function index(Request $request, PaginatorInterface $paginator)
     {
         $listSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
+        foreach ($listSeries as $uneSerie) {
+            if ($listSeries[0]->getId() == $uneSerie->getId()) {
+                $minDuree = $uneSerie->getTempsTotal();
+                $maxDuree = $minDuree;
+            } else if ($minDuree > $uneSerie->getTempsTotal()) {
+                $minDuree = $uneSerie->getTempsTotal();
+            } else if ($maxDuree < $uneSerie->getTempsTotal()) {
+                $maxDuree = $uneSerie->getTempsTotal();
+            }
+        }
         $listSeries = $paginator->paginate(
             $listSeries, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/
@@ -26,6 +36,8 @@ class SerieController extends AbstractController
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,
             'listGenres' => $listGenres,
+            'minDuree' => $minDuree,
+            'maxDuree' => $maxDuree
         ]);
     }
 
@@ -41,7 +53,7 @@ class SerieController extends AbstractController
             $request->query->getInt('page', 1),
             6
         );
-        
+
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,

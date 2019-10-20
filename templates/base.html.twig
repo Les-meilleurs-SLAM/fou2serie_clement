@@ -35,6 +35,14 @@
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })
+            
+            $(function () {
+                $('.range').next().text('--'); // Valeur par défaut
+                $('.range').on('input', function () {
+                    var $set = $(this).val();
+                    $(this).next().text($set);
+                });
+            });
         </script>
         <style type="text/css">
             @media(max-width: 768px) {
@@ -115,6 +123,10 @@
             .hover-blueA>a:hover {
                 background-color: #4285F4;
                 color: white;
+            }
+            .notHover-blue {
+                background-color: white !important;
+                color: black !important;
             }
         </style>
     </head>
