@@ -16,7 +16,7 @@
                 {% endfor %}
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item disabled">Durée de la série maximum (en min)</a>
-                <a class="dropdown-item notHover-blue" href="{{ path('serieByDuree', {'duree': unGenre.id}) }}"><input type="range" min="{{ minDuree }}" max="{{ maxDuree }}" class="custom-range range" data-toggle="tooltip" title="" id="range" name="range">
+                <a class="dropdown-item notHover-blue"><input type="range" min="{{ minDuree }}" max="{{ maxDuree }}" class="custom-range range" data-toggle="tooltip" title="" id="range" name="range">
                 <output></output>
                 </a>
             </div>
