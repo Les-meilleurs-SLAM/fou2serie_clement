@@ -32,4 +32,14 @@ class SerieRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function getSerieByDuree($duree)
+    {
+        return $this->createQueryBuilder('serie')
+            ->where('serie.duree < :duree')
+            ->setParameter('duree', $duree)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

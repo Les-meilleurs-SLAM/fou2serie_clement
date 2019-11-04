@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Les Séries
+{% block title %}Séries - Fou de séries
 {% endblock %}
 
 {% block body %}
@@ -15,9 +15,13 @@
                     <a class="dropdown-item" href="{{ path('serieByGenre', {'genreId': unGenre.id}) }}">{{ unGenre.libelleGenre|capitalize }}</a>
                 {% endfor %}
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item disabled">Durée de la série maximum (en min)</a>
-                <a class="dropdown-item notHover-blue"><input type="range" min="{{ minDuree }}" max="{{ maxDuree }}" class="custom-range range" data-toggle="tooltip" title="" id="range" name="range">
-                <output></output>
+                <a class="dropdown-item disabled">Durée maximum de l'épisode</a>
+                <a class="dropdown-item notHover-blue row">
+                    <input type="range" min="{{ minDuree|date('i') }}" max="{{ maxDuree|date('i') }}" class="custom-range range col-lg-10" id="range" name="range">
+                    <output class="col-lg-2"></output>
+                </a>
+                <a class="dropdown-item notHover-blue row col-lg-12" id="sendButton" href="{{ path('serieByDuree', {'duree': 400000}) }}">
+                    <i class="far fa-paper-plane btn btn-block btn-primary btn-sm"></i>
                 </a>
             </div>
         </div>

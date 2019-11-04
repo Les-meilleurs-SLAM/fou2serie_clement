@@ -19,12 +19,12 @@ class SerieController extends AbstractController
         $listSeries = $this->getDoctrine()->getRepository(Serie::class)->findBy(array(), array('titre' => 'ASC'));
         foreach ($listSeries as $uneSerie) {
             if ($listSeries[0]->getId() == $uneSerie->getId()) {
-                $minDuree = $uneSerie->getTempsTotal();
+                $minDuree = $uneSerie->getDuree();
                 $maxDuree = $minDuree;
-            } else if ($minDuree > $uneSerie->getTempsTotal()) {
-                $minDuree = $uneSerie->getTempsTotal();
-            } else if ($maxDuree < $uneSerie->getTempsTotal()) {
-                $maxDuree = $uneSerie->getTempsTotal();
+            } else if ($minDuree > $uneSerie->getDuree()) {
+                $minDuree = $uneSerie->getDuree();
+            } else if ($maxDuree < $uneSerie->getDuree()) {
+                $maxDuree = $uneSerie->getDuree();
             }
         }
         $listSeries = $paginator->paginate(
@@ -42,12 +42,23 @@ class SerieController extends AbstractController
     }
 
     /**
-     * @Route("/serie/{genreId}", name="serieByGenre")
+     * @Route("/serieByDuree/{duree}", name="serieByDuree")
      */
-    public function serieByGenre(Request $request, PaginatorInterface $paginator, $genreId)
+    public function serieByDuree($duree, Request $request, PaginatorInterface $paginator)
     {
-        $leGenre = $this->getDoctrine()->getRepository(Genre::class)->find($genreId);
-        $listSeries = $leGenre->getlesSeries();
+        $listSeries = $this->getDoctrine()->getRepository(Serie::class)->getSerieByDuree($duree);
+        $minDuree = 0;
+        $maxDuree = 0;
+        foreach ($listSeries as $uneSerie) {
+            if ($listSeries[0]->getId() == $uneSerie->getId()) {
+                $minDuree = $uneSerie->getDuree();
+                $maxDuree = $minDuree;
+            } else if ($minDuree > $uneSerie->getDuree()) {
+                $minDuree = $uneSerie->getDuree();
+            } else if ($maxDuree < $uneSerie->getDuree()) {
+                $maxDuree = $uneSerie->getDuree();
+            }
+        }
         $listSeries = $paginator->paginate(
             $listSeries,
             $request->query->getInt('page', 1),
@@ -57,7 +68,41 @@ class SerieController extends AbstractController
         $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
         return $this->render('serie/index.html.twig', [
             'listSeries' => $listSeries,
-            'listGenres' => $listGenres
+            'listGenres' => $listGenres,
+            'minDuree' => $minDuree,
+            'maxDuree' => $maxDuree
+        ]);
+    }
+
+    /**
+     * @Route("/serieByGenre/{genreId}", name="serieByGenre")
+     */
+    public function serieByGenre(Request $request, PaginatorInterface $paginator, $genreId)
+    {
+        $leGenre = $this->getDoctrine()->getRepository(Genre::class)->find($genreId);
+        $listSeries = $leGenre->getlesSeries();
+        foreach ($listSeries as $uneSerie) {
+            if ($listSeries[0]->getId() == $uneSerie->getId()) {
+                $minDuree = $uneSerie->getDuree();
+                $maxDuree = $minDuree;
+            } else if ($minDuree > $uneSerie->getDuree()) {
+                $minDuree = $uneSerie->getDuree();
+            } else if ($maxDuree < $uneSerie->getDuree()) {
+                $maxDuree = $uneSerie->getDuree();
+            }
+        }
+        $listSeries = $paginator->paginate(
+            $listSeries,
+            $request->query->getInt('page', 1),
+            6
+        );
+
+        $listGenres = $this->getDoctrine()->getRepository(Genre::class)->findAll();
+        return $this->render('serie/index.html.twig', [
+            'listSeries' => $listSeries,
+            'listGenres' => $listGenres,
+            'minDuree' => $minDuree,
+            'maxDuree' => $maxDuree
         ]);
     }
 
