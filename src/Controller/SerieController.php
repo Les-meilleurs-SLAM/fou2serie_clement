@@ -7,10 +7,39 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
 use App\Entity\Genre;
 use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class SerieController extends AbstractController
 {
+    /**
+     * @Route("/series", name="series")
+     */
+    public function getSeries(Request $request)
+    {
+        $repo = $this->getDoctrine()->getRepository(Serie::class);
+        $series = $repo->findAll();
+        $formatted = [];
+        foreach ($series as $serie) {
+            $lesGenres = $serie->getLesGenres();
+            $genreDeLaSerie = "";
+            foreach ($lesGenres as $unGenre) {
+                $genreDeLaSerie = $genreDeLaSerie . ';' . $unGenre->getLibelleGenre();
+            }
+            $formatted[] = [
+                'id'                => $serie->getId(),
+                'titre'             => $serie->getTitre(),
+                'resume'            => $serie->getResume(),
+                'duree'             => $serie->getDuree(),
+                'premiereDiffusion' => $serie->getPremiereDiffusion(),
+                'image'             => $serie->getImage(),
+                'video'             => $serie->getVideo(),
+                'lesGenres'         => ltrim($genreDeLaSerie, $genreDeLaSerie[0])
+            ];
+        }
+        return new JsonResponse($formatted);
+    }
+
     /**
      * @Route("/serie", name="serie")
      */
